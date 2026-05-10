@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soonh Baloch | Interactive Elements</title>
+    <style>
+        /* CSS: The Skin (Visual Identity) [cite: 232] */
+        :root {
+            --bg: #f4f7f6;
+            --text: #333;
+            --primary: #2ecc71;
+            --card: #ffffff;
+        }
+
+        .dark-mode {
+            --bg: #2c3e50;
+            --text: #ecf0f1;
+            --card: #34495e;
+            --primary: #f1c40f;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: 0.4s;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        .btn-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: var(--primary);
+            color: #000;
+            font-weight: bold;
+        }
+
+        #display-text {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="mode-toggle" style="margin-bottom: 20px;">🌙 Toggle Mode</button>
+
+    <div class="card">
+        <h2>Our Services</h2>
+        <p>Click below to see details:</p>
+        
+        <div class="btn-box">
+            <button class="service-btn" data-info="We build fast websites!">Web Dev</button>
+            <button class="service-btn" data-info="We create beautiful UI/UX!">Design</button>
+            <button class="service-btn" data-info="We rank you on Google!">SEO</button>
+        </div>
+
+        <div id="display-text">Waiting for your selection...</div>
+    </div>
+
+    <script>
+        // 1. INPUT: Targeting the nodes [cite: 293]
+        const modeBtn = document.getElementById('mode-toggle');
+        const displayText = document.getElementById('display-text');
+        const serviceBtns = document.querySelectorAll('.service-btn');
+
+        // 2. PROCESS & OUTPUT: Theme Logic
+        modeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            modeBtn.textContent = document.body.classList.contains('dark-mode') ? "☀️ Light Mode" : "🌙 Dark Mode";
+        });
+
+        // 3. PROCESS & OUTPUT: Dynamic Content Update [cite: 265]
+        serviceBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const info = btn.getAttribute('data-info');
+                displayText.textContent = info; // Mutation: Visible Change
+                displayText.style.color = "var(--primary)";
+            });
+        });
+    </script>
+</body>
+</html>
